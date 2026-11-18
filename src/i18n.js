@@ -18,6 +18,8 @@
   S.en = {
     'pick.title': 'What do you want to play, {name}?',
     'pick.sub': 'You can switch at any time at the top of the page.',
+    'flags.awale': 'Played in Côte d\'Ivoire, Ghana, Benin and Togo',
+    'flags.bao': 'Played in Tanzania and Kenya',
     'pick.awale': '2 rows · West Africa · the easiest to start',
     'pick.bao': '4 rows · East Africa · long chains of moves',
     'game.switch': 'Game',
@@ -254,6 +256,8 @@
   S.fr = {
     'pick.title': 'À quoi veux-tu jouer, {name} ?',
     'pick.sub': 'Tu peux changer à tout moment en haut de la page.',
+    'flags.awale': 'Joué en Côte d\'Ivoire, au Ghana, au Bénin et au Togo',
+    'flags.bao': 'Joué en Tanzanie et au Kenya',
     'pick.awale': '2 rangées · Afrique de l\'Ouest · le plus simple pour débuter',
     'pick.bao': '4 rangées · Afrique de l\'Est · de longues chaînes de coups',
     'game.switch': 'Jeu',
@@ -490,6 +494,8 @@
   S.de = {
     'pick.title': 'Was möchtest du spielen, {name}?',
     'pick.sub': 'Du kannst oben auf der Seite jederzeit wechseln.',
+    'flags.awale': 'Gespielt in der Elfenbeinküste, Ghana, Benin und Togo',
+    'flags.bao': 'Gespielt in Tansania und Kenia',
     'pick.awale': '2 Reihen · Westafrika · am leichtesten für den Anfang',
     'pick.bao': '4 Reihen · Ostafrika · lange Zugketten',
     'game.switch': 'Spiel',
@@ -726,6 +732,8 @@
   S.it = {
     'pick.title': 'A cosa vuoi giocare, {name}?',
     'pick.sub': 'Puoi cambiare quando vuoi in alto nella pagina.',
+    'flags.awale': 'Giocato in Costa d\'Avorio, Ghana, Benin e Togo',
+    'flags.bao': 'Giocato in Tanzania e Kenya',
     'pick.awale': '2 file · Africa occidentale · il più facile per iniziare',
     'pick.bao': '4 file · Africa orientale · lunghe catene di mosse',
     'game.switch': 'Gioco',

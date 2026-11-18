@@ -1254,6 +1254,7 @@
   function applyStatic() {
     for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
     for (const el of document.querySelectorAll('[data-i18n-aria]')) el.setAttribute('aria-label', t(el.dataset.i18nAria));
+    for (const el of document.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);
     document.documentElement.lang = I18n.lang;
     const sel = $('lang-select');
     sel.innerHTML = I18n.LANGS.map((l) => '<option value="' + l.id + '">' + l.short + '</option>').join('');

@@ -62,6 +62,7 @@ button, select { font: inherit; color: inherit; }
   font: 800 clamp(2.2rem, 5vw, 3.2rem)/0.9 var(--f-display);
   letter-spacing: -0.03em; margin: 0; color: var(--ink);
 }
+.brand h1 .flags { font-size: .5em; letter-spacing: .08em; vertical-align: .3em; margin-left: .15em; cursor: default; }
 .tagline { margin: 6px 0 0; color: var(--muted); font-size: .95rem; }
 .modes { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); flex-wrap: wrap; }
 .modes button {
