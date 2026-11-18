@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- BUILD:HEAD -->
+<title>Bao</title>
+<meta name="description" content="Learn and play Bao, the great seed game of East Africa: a 1-minute video, lessons and a friendly computer opponent. Learners' rules (Bao la Kujifunza). EN / FR / DE / IT.">
+<meta name="theme-color" content="#2c3c9e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238b4a28'/%3E%3Ccircle cx='20' cy='24' r='9' fill='%233d1d0d'/%3E%3Ccircle cx='44' cy='24' r='9' fill='%233d1d0d'/%3E%3Ccircle cx='20' cy='44' r='9' fill='%233d1d0d'/%3E%3Ccircle cx='44' cy='44' r='9' fill='%233d1d0d'/%3E%3Ccircle cx='44' cy='44' r='4' fill='%23e4dfd2'/%3E%3Ccircle cx='20' cy='24' r='4' fill='%23e4dfd2'/%3E%3C/svg%3E">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<!-- /BUILD:HEAD -->
+</head>
+<body>
+<!-- BUILD:BODY -->
+<div class="welcome" id="welcome" hidden>
+  <div class="welcome-inner">
+    <p class="welcome-brand">Bao</p>
+    <h2 class="welcome-title" id="welcome-title">Who's playing?</h2>
+    <p class="welcome-sub" id="welcome-sub"></p>
+    <div class="welcome-grid" id="welcome-grid"></div>
+    <div class="game-pick" id="game-pick" hidden>
+      <button class="tile game" data-game="awale"><span class="game-art awale" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tile-name">Awale</span><span class="tile-meta" data-i18n="pick.awale"></span></button>
+      <button class="tile game" data-game="bao"><span class="game-art bao" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tile-name">Bao</span><span class="tile-meta" data-i18n="pick.bao"></span></button>
+    </div>
+    <form class="welcome-form" id="welcome-form" hidden>
+      <input id="welcome-name" type="text" maxlength="14" autocomplete="off" spellcheck="false" data-i18n-aria="welcome.ph">
+      <button class="btn primary" type="submit" id="welcome-go">Let's play</button>
+    </form>
+    <p class="welcome-error" id="welcome-error" aria-live="polite"></p>
+    <button class="btn ghost" id="welcome-cancel" hidden>Cancel</button>
+    <div class="welcome-langs" id="welcome-langs" role="group" data-i18n-aria="lang.label"></div>
+  </div>
+</div>
+
+<div class="app">
+  <header class="top">
+    <div class="topbar">
+      <nav class="games-switch" data-i18n-aria="game.switch">
+        <a href="./" id="go-awale">Awale</a>
+        <a href="bao.html" id="go-bao" aria-current="page">Bao</a>
+      </nav>
+      <div class="topbar-right">
+        <select class="lang-select" id="lang-select" data-i18n-aria="lang.label"></select>
+        <button class="profile" id="btn-profile" data-i18n-aria="profile.aria"></button>
+      </div>
+    </div>
+    <div class="brand">
+      <h1>Bao</h1>
+      <p class="tagline" data-i18n="bao.tagline"></p>
+    </div>
+    <div class="top-right">
+    <nav class="modes" role="tablist" aria-label="Mode">
+      <button id="mode-video" role="tab" data-mode="video" data-i18n="mode.video"></button>
+      <button id="mode-learn" role="tab" data-mode="learn" data-i18n="mode.learn"></button>
+      <button id="mode-puzzle" role="tab" data-mode="puzzle" data-i18n="mode.puzzle"></button>
+      <button id="mode-cpu" role="tab" data-mode="cpu" data-i18n="mode.cpu"></button>
+      <button id="mode-duo" role="tab" data-mode="duo" data-i18n="mode.duo"></button>
+    </nav>
+    </div>
+  </header>
+
+  <section class="video-view" id="video-view" hidden>
+    <h2 class="video-title" data-i18n="bao.video.title"></h2>
+    <p class="video-sub" data-i18n="video.sub"></p>
+    <video id="rules-video" controls preload="metadata" playsinline></video>
+    <button class="btn primary" id="video-start" data-i18n="video.start"></button>
+  </section>
+
+  <main class="layout solo" id="layout">
+    <section class="table" aria-label="Board">
+      <section class="card puzzle" id="puzzle-card" hidden>
+        <div class="lesson-top">
+          <span class="eyebrow" id="pz-step"></span>
+          <span class="pz-badges"><span class="pz-badge daily" id="pz-daily" hidden></span><span class="pz-badge streak" id="pz-streak" hidden></span></span>
+        </div>
+        <div class="pz-head">
+          <h2 id="pz-title"></h2>
+          <span id="pz-best"></span>
+        </div>
+        <p class="task" id="pz-task"></p>
+        <div class="lesson-nav">
+          <button class="btn" id="pz-prev" data-i18n="lesson.prev"></button>
+          <button class="btn" id="pz-next-card" data-i18n="puzzle.next"></button>
+          <button class="btn" id="pz-today" hidden></button>
+        </div>
+        <details class="pz-all">
+          <summary><span data-i18n="puzzle.all"></span> <span class="summary-note" id="pz-progress"></span></summary>
+          <div class="pz-grid" id="pz-grid"></div>
+        </details>
+      </section>
+      <section class="card lesson" id="lesson-card" hidden>
+        <div class="lesson-top">
+          <span class="eyebrow" id="lesson-step"></span>
+          <ol class="dots" id="lesson-dots"></ol>
+        </div>
+        <h2 id="lesson-title"></h2>
+        <p id="lesson-intro"></p>
+        <p class="task" id="lesson-task"></p>
+        <div class="lesson-result" id="lesson-result" hidden></div>
+        <div class="lesson-nav">
+          <button class="btn" id="lesson-prev" data-i18n="lesson.prev"></button>
+          <button class="btn" id="lesson-retry" data-i18n="lesson.reset"></button>
+          <button class="btn primary" id="lesson-next">Next lesson</button>
+        </div>
+      </section>
+      <div class="matchup" id="matchup" hidden>
+        <span class="who" id="who-0"></span>
+        <span class="who-text" data-i18n="who.plays"></span>
+        <button class="who who-btn" id="who-1" data-i18n-aria="who.change" hidden></button>
+        <span class="who-text" id="who-end" data-i18n="who.computer"></span>
+      </div>
+      <div class="difficulty" id="difficulty" hidden>
+        <span class="eyebrow" id="difficulty-label" data-i18n="level.label"></span>
+        <div class="seg" role="group" aria-labelledby="difficulty-label">
+          <button data-level="easy" id="lvl-easy" data-i18n="level.easy"></button>
+          <button data-level="medium" id="lvl-medium" data-i18n="level.medium"></button>
+          <button data-level="hard" id="lvl-hard" data-i18n="level.hard"></button>
+        </div>
+        <span class="difficulty-note" id="difficulty-note"></span>
+      </div>
+      <div class="rules-mode" id="rules-mode">
+        <span class="eyebrow" id="rules-label" data-i18n="bao.rules"></span>
+        <div class="seg small" role="group" aria-labelledby="rules-label">
+          <button id="rules-learner" aria-pressed="true"><span aria-hidden="true">✓ </span><span data-i18n="bao.learner"></span></button>
+          <button id="rules-advanced" aria-pressed="false" aria-disabled="true"><span data-i18n="bao.advanced"></span></button>
+        </div>
+        <span class="difficulty-note" id="rules-note" data-i18n="bao.learnerNote"></span>
+      </div>
+      <div class="status" id="status" aria-live="polite"></div>
+      <div class="alert" id="alert" role="alert" hidden></div>
+
+      <div class="board bao-board" id="board">
+        <div class="store store-n bao-store" id="store-1">
+          <span class="store-label" id="label-1"></span>
+          <span class="store-count">0</span>
+        </div>
+        <div class="bao-rows" id="bao-rows"></div>
+        <div class="store store-s bao-store" id="store-0">
+          <span class="store-label" id="label-0"></span>
+          <span class="store-count">0</span>
+        </div>
+        <div class="endcard" id="endcard" hidden>
+          <p class="end-eyebrow" id="end-reason"></p>
+          <p class="end-title" id="end-title"></p>
+          <p class="end-score" id="end-score"></p>
+          <button class="btn primary" id="end-new" data-i18n="end.again"></button>
+        </div>
+      </div>
+
+      <div class="explain" id="coach-body" aria-live="polite"></div>
+
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw sw-legal"></i><span data-i18n="legend.can"></span></span>
+        <span><i class="sw sw-illegal"></i><span data-i18n="legend.not"></span></span>
+        <span><i class="sw sw-path"></i><span data-i18n="legend.path"></span></span>
+        <span><i class="sw sw-capture"></i><span data-i18n="legend.win"></span></span>
+        <span><i class="sw sw-front"></i><span data-i18n="bao.front"></span></span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="btn-undo" data-i18n="btn.undo"></button>
+        <button class="btn" id="btn-hint" data-i18n="btn.hint"></button>
+        <button class="btn" id="btn-split" data-i18n="btn.split" hidden></button>
+        <button class="btn ghost" id="btn-new" data-i18n="btn.new"></button>
+        <button class="switch" id="btn-warn" role="switch" aria-checked="true">
+          <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+          <span><span data-i18n="warn.label"></span> <b id="warn-state"></b></span>
+        </button>
+      </div>
+      <details class="card games" id="games-card">
+        <summary><span data-i18n="games.title"></span> <span class="summary-note" id="games-count"></span></summary>
+        <div class="games-body">
+          <p class="games-stats" id="games-stats"></p>
+          <ol class="games-list" id="games-list"></ol>
+          <div class="btnrow">
+            <button class="btn" id="games-copy" data-i18n="games.copy"></button>
+            <button class="btn subtle" id="games-clear"></button>
+          </div>
+          <p class="games-msg" id="games-msg" aria-live="polite"></p>
+        </div>
+      </details>
+
+      <details class="card log" id="moves">
+        <summary data-i18n="moves.title"></summary>
+        <ol class="log-list" id="log"></ol>
+      </details>
+
+      <details class="card settings" id="settings">
+        <summary data-i18n="settings.title"></summary>
+        <div class="settings-body">
+        <label class="check" id="field-adaptive"><input type="checkbox" id="opt-adaptive"> <span data-i18n="settings.adaptive"></span></label>
+        <label class="check"><input type="checkbox" id="opt-ratings"> <span data-i18n="settings.ratings"></span></label>
+        <div class="field">
+          <label for="opt-speed" data-i18n="settings.speed"></label>
+          <select id="opt-speed">
+            <option value="420" data-i18n="speed.slow"></option>
+            <option value="220" data-i18n="speed.normal"></option>
+            <option value="90" data-i18n="speed.fast"></option>
+            <option value="0" data-i18n="speed.instant"></option>
+          </select>
+        </div>
+        <div class="field" id="field-first">
+          <label for="opt-first" data-i18n="settings.first"></label>
+          <select id="opt-first">
+            <option value="0" data-i18n="first.you"></option>
+            <option value="1" data-i18n="first.cpu"></option>
+          </select>
+        </div>
+      </div>
+      </details>
+
+      <details class="card rules" id="rules-card">
+        <summary data-i18n="bao.rules.title"></summary>
+        <ul>
+          <li data-i18n="bao.rules.1"></li>
+          <li data-i18n="bao.rules.2"></li>
+          <li data-i18n="bao.rules.3"></li>
+          <li data-i18n="bao.rules.4"></li>
+          <li data-i18n="bao.rules.5"></li>
+          <li data-i18n="bao.rules.6"></li>
+          <li data-i18n="bao.rules.7"></li>
+          <li data-i18n="bao.rules.8"></li>
+        </ul>
+      </details>
+    </section>
+
+  </main>
+  <footer class="foot"><p data-i18n="foot.privacy"></p></footer>
+</div>
+
+<script src="src/config.js"></script>
+<script src="src/i18n.js"></script>
+<script src="src/bao/engine.js"></script>
+<script src="src/bao/advisor.js"></script>
+<script src="src/bao/lessons.js"></script>
+<script src="src/bao/puzzles.js"></script>
+<script src="src/bao/app.js"></script>
+<!-- /BUILD:BODY -->
+</body>
+</html>
